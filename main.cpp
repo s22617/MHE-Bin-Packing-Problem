@@ -1,12 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <string>
+#include "hill-climbing/HillClimbing.h"
+
+auto items = std::vector<int> {2, 5, 8, 5, 4, 1, 4};
+
+HillClimbing* HillClimbing::sInstance = nullptr;
 
 int main() {
-    using namespace std;
-
-//    static vector<int> garbage = {5, 7, 2, 3};
-//    static int bin_size = 10;
-
+    HillClimbing::getInstance()->runHillClimbing(items);
     return 0;
 }
