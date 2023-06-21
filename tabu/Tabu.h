@@ -1,7 +1,6 @@
 #ifndef BINPACKINGPROBLEM_TABU_H
 #define BINPACKINGPROBLEM_TABU_H
 
-
 #include <vector>
 
 class Tabu {
@@ -10,7 +9,7 @@ public:
         return sInstance = (sInstance != nullptr) ? sInstance : new Tabu();
     }
 
-    void tabuSearch(std::vector<int> items);
+    void tabuSearch(std::vector<int> items, int tabuSize);
 
 private:
     int bestBinsCount;

@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "BinPackingProblem.exe"
   "BinPackingProblem.exe.manifest"
+  "BinPackingProblem.lib"
   "BinPackingProblem.pdb"
   "CMakeFiles/BinPackingProblem.dir/Solution.cpp.obj"
   "CMakeFiles/BinPackingProblem.dir/Solution.cpp.obj.d"
@@ -8,9 +9,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/BinPackingProblem.dir/hill-climbing/HillClimbing.cpp.obj.d"
   "CMakeFiles/BinPackingProblem.dir/main.cpp.obj"
   "CMakeFiles/BinPackingProblem.dir/main.cpp.obj.d"
+  "CMakeFiles/BinPackingProblem.dir/simulated-annealing/SimulatedAnnealing.cpp.obj"
+  "CMakeFiles/BinPackingProblem.dir/simulated-annealing/SimulatedAnnealing.cpp.obj.d"
   "CMakeFiles/BinPackingProblem.dir/tabu/Tabu.cpp.obj"
   "CMakeFiles/BinPackingProblem.dir/tabu/Tabu.cpp.obj.d"
-  "libBinPackingProblem.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

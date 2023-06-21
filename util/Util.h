@@ -5,10 +5,12 @@
 #include <vector>
 #include <random>
 
+namespace {
 auto randomDevice = std::random_device{};
 auto generator = std::mt19937{randomDevice()};
 
 int binWeightLimit = 10;
+}
 
 class Util {
     public:
@@ -41,6 +43,7 @@ class Util {
                 bestNeighbour = neighbours.at(i+1);
             }
         }
+
         return bestNeighbour;
     }
 
