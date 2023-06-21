@@ -12,6 +12,38 @@ int binWeightLimit = 10;
 
 class Util {
     public:
+    auto getBins(const std::vector<int>& a) {
+        auto bins = std::vector<std::vector<int>>{{}};
+        int lastBinWeight = 0;
+
+        for (int i : a) {
+            if ((lastBinWeight + i) > binWeightLimit) {
+                bins.push_back({i});
+                lastBinWeight = i;
+            }
+            else {
+                bins.back().push_back(i);
+                lastBinWeight += i;
+            }
+        }
+        return bins;
+    }
+
+    std::vector<int> getBestNeighbour(const std::vector<int> &items) {
+
+        auto neighbours = getNeighbours(items);
+        auto bestNeighbour = std::vector<int>{};
+        for (int i = 0; i < neighbours.size() - 1; i++) {
+            if (getBins(neighbours.at(i)).size() < getBins(neighbours.at(i + 1)).size()) {
+                bestNeighbour = neighbours.at(i);
+            }
+            else {
+                bestNeighbour = neighbours.at(i+1);
+            }
+        }
+        return bestNeighbour;
+    }
+
     std::vector<int> getRandomNeighbour(const std::vector<int>& items) {
         auto newNeighbour = items;
 
@@ -32,23 +64,6 @@ class Util {
             neighbours.push_back(newNeighbour);
         }
         return neighbours;
-    }
-
-    auto getBins(const std::vector<int>& a) {
-        auto bins = std::vector<std::vector<int>>{{}};
-        int lastBinWeight = 0;
-
-        for (int i : a) {
-            if ((lastBinWeight + i) > binWeightLimit) {
-                bins.push_back({i});
-                lastBinWeight = i;
-            }
-            else {
-                bins.back().push_back(i);
-                lastBinWeight += i;
-            }
-        }
-        return bins;
     }
 
     void printBins(const std::vector<std::vector<int>>& bins) {
