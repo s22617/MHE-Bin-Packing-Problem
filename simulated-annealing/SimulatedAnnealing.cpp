@@ -7,8 +7,6 @@
 #include "SimulatedAnnealing.h"
 #include "../util/Util.h"
 
-std::mt19937 rgen(109908093657865);
-
 void SimulatedAnnealing::simulatedAnnealing(std::vector<int> items, std::function<double(int)> T) {
     auto util = new Util();
 
@@ -27,7 +25,7 @@ void SimulatedAnnealing::simulatedAnnealing(std::vector<int> items, std::functio
         else {
             std::uniform_real_distribution<double> u(0.0, 1.0);
 
-            if (u(rgen) < std::exp(-std::abs((double)(util->getBins(newSolution).size() - util->getBins(s).size())/T(i)))) {
+            if (u(generator) < std::exp(-std::abs((double)(util->getBins(newSolution).size() - util->getBins(s).size())/T(i)))) {
                 s = newSolution;
             }
         }

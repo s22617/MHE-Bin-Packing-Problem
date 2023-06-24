@@ -142,6 +142,30 @@ Solution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\Solution.cpp.s
 .PHONY : Solution.cpp.s
 
+genetic-algorithm\GeneticAlgorithm.obj: genetic-algorithm\GeneticAlgorithm.cpp.obj
+.PHONY : genetic-algorithm\GeneticAlgorithm.obj
+
+# target to build an object file
+genetic-algorithm\GeneticAlgorithm.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj
+.PHONY : genetic-algorithm\GeneticAlgorithm.cpp.obj
+
+genetic-algorithm\GeneticAlgorithm.i: genetic-algorithm\GeneticAlgorithm.cpp.i
+.PHONY : genetic-algorithm\GeneticAlgorithm.i
+
+# target to preprocess a source file
+genetic-algorithm\GeneticAlgorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.i
+.PHONY : genetic-algorithm\GeneticAlgorithm.cpp.i
+
+genetic-algorithm\GeneticAlgorithm.s: genetic-algorithm\GeneticAlgorithm.cpp.s
+.PHONY : genetic-algorithm\GeneticAlgorithm.s
+
+# target to generate assembly for a file
+genetic-algorithm\GeneticAlgorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.s
+.PHONY : genetic-algorithm\GeneticAlgorithm.cpp.s
+
 hill-climbing\HillClimbing.obj: hill-climbing\HillClimbing.cpp.obj
 .PHONY : hill-climbing\HillClimbing.obj
 
@@ -250,6 +274,9 @@ help:
 	@echo ... Solution.obj
 	@echo ... Solution.i
 	@echo ... Solution.s
+	@echo ... genetic-algorithm/GeneticAlgorithm.obj
+	@echo ... genetic-algorithm/GeneticAlgorithm.i
+	@echo ... genetic-algorithm/GeneticAlgorithm.s
 	@echo ... hill-climbing/HillClimbing.obj
 	@echo ... hill-climbing/HillClimbing.i
 	@echo ... hill-climbing/HillClimbing.s

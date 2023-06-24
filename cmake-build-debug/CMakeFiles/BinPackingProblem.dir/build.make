@@ -158,13 +158,34 @@ CMakeFiles\BinPackingProblem.dir\simulated-annealing\SimulatedAnnealing.cpp.s: c
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\BinPackingProblem.dir\simulated-annealing\SimulatedAnnealing.cpp.s /c C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\simulated-annealing\SimulatedAnnealing.cpp
 <<
 
+CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj: CMakeFiles\BinPackingProblem.dir\flags.make
+CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj: C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\genetic-algorithm\GeneticAlgorithm.cpp
+CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj: CMakeFiles\BinPackingProblem.dir\compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BinPackingProblem.dir/genetic-algorithm/GeneticAlgorithm.cpp.obj"
+	$(CMAKE_COMMAND) -E cmake_cl_compile_depends --dep-file=CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj.d --working-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug --filter-prefix="Uwaga: w tym pliku:  " -- "D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x64\cl.exe" @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /showIncludes /FoCMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj /FdCMakeFiles\BinPackingProblem.dir\ /FS -c C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\genetic-algorithm\GeneticAlgorithm.cpp
+<<
+
+CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BinPackingProblem.dir/genetic-algorithm/GeneticAlgorithm.cpp.i"
+	"D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x64\cl.exe" > CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\genetic-algorithm\GeneticAlgorithm.cpp
+<<
+
+CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BinPackingProblem.dir/genetic-algorithm/GeneticAlgorithm.cpp.s"
+	"D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x64\cl.exe" @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.s /c C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\genetic-algorithm\GeneticAlgorithm.cpp
+<<
+
 # Object files for target BinPackingProblem
 BinPackingProblem_OBJECTS = \
 "CMakeFiles\BinPackingProblem.dir\main.cpp.obj" \
 "CMakeFiles\BinPackingProblem.dir\hill-climbing\HillClimbing.cpp.obj" \
 "CMakeFiles\BinPackingProblem.dir\tabu\Tabu.cpp.obj" \
 "CMakeFiles\BinPackingProblem.dir\Solution.cpp.obj" \
-"CMakeFiles\BinPackingProblem.dir\simulated-annealing\SimulatedAnnealing.cpp.obj"
+"CMakeFiles\BinPackingProblem.dir\simulated-annealing\SimulatedAnnealing.cpp.obj" \
+"CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj"
 
 # External object files for target BinPackingProblem
 BinPackingProblem_EXTERNAL_OBJECTS =
@@ -174,9 +195,10 @@ BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\hill-climbing\HillClimbi
 BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\tabu\Tabu.cpp.obj
 BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\Solution.cpp.obj
 BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\simulated-annealing\SimulatedAnnealing.cpp.obj
+BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\genetic-algorithm\GeneticAlgorithm.cpp.obj
 BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\build.make
 BinPackingProblem.exe: CMakeFiles\BinPackingProblem.dir\objects1
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable BinPackingProblem.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable BinPackingProblem.exe"
 	"C:\Program Files\JetBrains\CLion 2023.1.2\bin\cmake\win\x64\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\BinPackingProblem.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x86\mt.exe --manifests -- "D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\Hostx86\x64\link.exe" /nologo @CMakeFiles\BinPackingProblem.dir\objects1 @<<
  /out:BinPackingProblem.exe /implib:BinPackingProblem.lib /pdb:C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\BinPackingProblem.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

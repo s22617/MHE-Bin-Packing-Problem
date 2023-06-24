@@ -90,6 +90,12 @@
 		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/Solution.h">
 			<Option target="BinPackingProblem"/>
 		</Unit>
+		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/genetic-algorithm/GeneticAlgorithm.cpp">
+			<Option target="BinPackingProblem"/>
+		</Unit>
+		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/genetic-algorithm/GeneticAlgorithm.h">
+			<Option target="BinPackingProblem"/>
+		</Unit>
 		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/hill-climbing/HillClimbing.cpp">
 			<Option target="BinPackingProblem"/>
 		</Unit>
@@ -109,6 +115,9 @@
 			<Option target="BinPackingProblem"/>
 		</Unit>
 		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/tabu/Tabu.h">
+			<Option target="BinPackingProblem"/>
+		</Unit>
+		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/util/Parameters.h">
 			<Option target="BinPackingProblem"/>
 		</Unit>
 		<Unit filename="C:/Users/Dan/CLionProjects/MHE-Bin-Packing-Problem/util/Util.h">

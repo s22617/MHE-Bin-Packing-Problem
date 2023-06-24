@@ -70,12 +70,12 @@ clean: CMakeFiles\BinPackingProblem.dir\clean
 CMakeFiles\BinPackingProblem.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinPackingProblem.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target BinPackingProblem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target BinPackingProblem"
 .PHONY : CMakeFiles\BinPackingProblem.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\BinPackingProblem.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\BinPackingProblem.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dan\CLionProjects\MHE-Bin-Packing-Problem\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles\BinPackingProblem.dir\rule

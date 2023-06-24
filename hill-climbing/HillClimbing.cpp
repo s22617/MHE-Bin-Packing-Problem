@@ -6,14 +6,19 @@ void HillClimbing::randomHillClimbing(std::vector<int> items) {
     auto util = new Util();
 
     auto bestSolution = items;
-    for (int i = 0; i < 5000; i++) {
-        auto testSolution = util->getRandomNeighbour(bestSolution);
-        bestBinsCount = util->getBins(bestSolution).size();
-        if (util->getBins(testSolution).size() <= util->getBins(bestSolution).size()) {
-            bestSolution = std::move(testSolution);
+
+    while(true) {
+
+        auto nextSolution = util->getRandomNeighbour(bestSolution);
+        //bestBinsCount = util->getBins(bestSolution).size();
+        if (util->getBins(nextSolution).size() <= util->getBins(bestSolution).size()) {
+            bestSolution = std::move(nextSolution);
+        } else {
+            break;
         }
     }
-    std::cout << "Random Hill Climbing bins used: " << bestBinsCount << std::endl;
+
+    std::cout << "Random Hill Climbing bins used: " << util->getBins(bestSolution).size() << std::endl;
     std::cout << "Following bins content: " << std::endl;
     util->printBins(util->getBins(bestSolution));
 }
@@ -23,14 +28,15 @@ void HillClimbing::deterministicHillClimbing(std::vector<int> items) {
     auto util = new Util();
     auto bestSolution = items;
 
-    for (int i = 0; i < 5000; i++) {
-        auto testSolution = util->getBestNeighbour(bestSolution);
-        bestBinsCount = util->getBins(bestSolution).size();
-        if(util->getBins(testSolution).size() < util->getBins(bestSolution).size()) {
-            bestSolution = std::move(testSolution);
+    while(true) {
+        auto nextSolution = util->getBestNeighbour(bestSolution);
+        if(util->getBins(nextSolution).size() < util->getBins(bestSolution).size()) {
+            bestSolution = std::move(nextSolution);
+        } else {
+            break;
         }
     }
-    std::cout << "Deterministic Hill Climbing bins used: " << bestBinsCount << std::endl;
+    std::cout << "Deterministic Hill Climbing bins used: " << util->getBins(bestSolution).size() << std::endl;
     std::cout << "Following bins content: " << std::endl;
     util->printBins(util->getBins(bestSolution));
 }

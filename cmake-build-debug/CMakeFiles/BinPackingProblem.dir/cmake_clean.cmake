@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "BinPackingProblem.pdb"
   "CMakeFiles/BinPackingProblem.dir/Solution.cpp.obj"
   "CMakeFiles/BinPackingProblem.dir/Solution.cpp.obj.d"
+  "CMakeFiles/BinPackingProblem.dir/genetic-algorithm/GeneticAlgorithm.cpp.obj"
+  "CMakeFiles/BinPackingProblem.dir/genetic-algorithm/GeneticAlgorithm.cpp.obj.d"
   "CMakeFiles/BinPackingProblem.dir/hill-climbing/HillClimbing.cpp.obj"
   "CMakeFiles/BinPackingProblem.dir/hill-climbing/HillClimbing.cpp.obj.d"
   "CMakeFiles/BinPackingProblem.dir/main.cpp.obj"
