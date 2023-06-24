@@ -1,3 +1,0 @@
-C:/Users/SOURI/CLionProjects/MHE-Bin-Packing-Problem/cmake-build-debug/CMakeFiles/BinPackingProblem.dir
-C:/Users/SOURI/CLionProjects/MHE-Bin-Packing-Problem/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/SOURI/CLionProjects/MHE-Bin-Packing-Problem/cmake-build-debug/CMakeFiles/rebuild_cache.dir
