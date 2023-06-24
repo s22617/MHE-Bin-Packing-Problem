@@ -1,19 +1,14 @@
-//
-// Created by Dan on 22.06.2023.
-//
-
-
 #include <functional>
 #include "SimulatedAnnealing.h"
 #include "../util/Util.h"
 
-void SimulatedAnnealing::simulatedAnnealing(std::vector<int> items, std::function<double(int)> T) {
-    auto util = new Util();
+void SimulatedAnnealing::simulatedAnnealing(std::vector<int> items, int sa_type, int binSize, int iter) {
+    auto util = new Util(binSize);
 
-    auto bestSolution = items;
-    auto s = items;
+    auto bestSolution = util->randomSolution(items);
+    auto s = bestSolution;
 
-    for (int i = 1; i < 5000; i++) {
+    for (int i = 1; i < iter; i++) {
         auto newSolution = util->getRandomNeighbour(s);
         bestBinsCount = util->getBins(bestSolution).size();
         if (util->getBins(newSolution).size() <= util->getBins(s).size()) {
@@ -24,8 +19,23 @@ void SimulatedAnnealing::simulatedAnnealing(std::vector<int> items, std::functio
         }
         else {
             std::uniform_real_distribution<double> u(0.0, 1.0);
+            std::function<double(int)> tp_function;
+            switch(sa_type) {
+                case 1:
+                    tp_function = [](int k) { return 1000.0 / k; };
+                    break;
+                case 2:
+                    tp_function = [](int k) { return 1.0 / std::log10(k); };
+                    break;
+                case 3:
+                    tp_function = [](int k) { return std::pow(0.5, k); };
+                    break;
+                default:
+                    std::cout << "WRONG TEMPERATURE METHOD TYPE ERROR" << std::endl;
+                    exit(0);
 
-            if (u(generator) < std::exp(-std::abs((double)(util->getBins(newSolution).size() - util->getBins(s).size())/T(i)))) {
+            }
+            if (u(generator) < std::exp(-std::abs((double)(util->getBins(newSolution).size() - util->getBins(s).size())/tp_function(i)))) {
                 s = newSolution;
             }
         }

@@ -3,8 +3,8 @@
 #include "GeneticAlgorithm.h"
 #include "../util/Util.h"
 
-std::vector<std::vector<int>> GeneticAlgorithm::getInitialPopulation(std::vector<int> items, int populationSize) {
-    auto util = new Util();
+std::vector<std::vector<int>> GeneticAlgorithm::getInitialPopulation(std::vector<int> items, int populationSize, int binSize) {
+    auto util = new Util(binSize);
     std::vector<std::vector<int>> population;
     for (int i = 0; i < populationSize; i++) {
         population.push_back(util->randomSolution(items));
@@ -13,25 +13,23 @@ std::vector<std::vector<int>> GeneticAlgorithm::getInitialPopulation(std::vector
     return population;
 }
 
-double GeneticAlgorithm::calculateFitness(std::vector<int> solution){
-    auto util = new Util();
+double GeneticAlgorithm::calculateFitness(std::vector<int> solution, int binSize){
+    auto util = new Util(binSize);
     return 1.0 / (1 + (double) util->getBins(solution).size());
 }
 
-const auto ITERATION_COUNT_LIMIT = 10;
-
-bool GeneticAlgorithm::endOnIterationCount() {
-    return iterationCount++ >= ITERATION_COUNT_LIMIT;
+bool GeneticAlgorithm::endOnIterationCount(int iterationCountLimit) {
+    return iterationCount++ >= iterationCountLimit;
 }
 
-bool GeneticAlgorithm::endOnSharedPopulationFitness(std::vector<std::vector<int>> &population) {
+bool GeneticAlgorithm::endOnSharedPopulationFitness(std::vector<std::vector<int>> &population, int sharedPopulationFitness, int binSize) {
     std::map<double, int> numberOfSpecificFitnessSolution;
 
-    auto specificSolutionCountPercentage = population.size() * 60 / 100;
+    auto specificSolutionCountPercentage = population.size() * sharedPopulationFitness / 100;
 
     for (int i = 0; i < population.size(); i++) {
 
-        auto fitness = calculateFitness(population[i]);
+        auto fitness = calculateFitness(population[i], binSize);
 
         if (numberOfSpecificFitnessSolution.count(fitness) != 0) {
             numberOfSpecificFitnessSolution[fitness] += 1;
@@ -51,12 +49,12 @@ bool GeneticAlgorithm::endOnSharedPopulationFitness(std::vector<std::vector<int>
     return false;
 }
 
-bool GeneticAlgorithm::terminalCondition(int terminalConditionType, std::vector<std::vector<int>> &population) {
+bool GeneticAlgorithm::terminalCondition(int terminalConditionType, std::vector<std::vector<int>> &population, int iterationCount, int sharedPopulationFitness, int binSize) {
     switch (terminalConditionType) {
         case 1:
-            return endOnSharedPopulationFitness(population);
+            return endOnSharedPopulationFitness(population, sharedPopulationFitness, binSize);
         case 2:
-            return endOnIterationCount();
+            return endOnIterationCount(iterationCount);
         default:
             std::cout << "WRONG TERMINAL CONDITION TYPE ERROR" << std::endl;
             exit(0);
@@ -65,11 +63,11 @@ bool GeneticAlgorithm::terminalCondition(int terminalConditionType, std::vector<
 
 
 
-std::vector<std::vector<int>> GeneticAlgorithm::selection(std::vector<std::vector<int>> population) {
+std::vector<std::vector<int>> GeneticAlgorithm::selection(std::vector<std::vector<int>> population, int binSize) {
     std::vector<int> fitnesses;
 
     for (int i = 0; i < population.size(); i++) {
-        fitnesses.push_back(calculateFitness(population[i]));
+        fitnesses.push_back(calculateFitness(population[i], binSize));
     }
 
     std::vector<std::vector<int>> parents;
@@ -185,9 +183,9 @@ std::pair<std::vector<int>, std::vector<int>> crossoverPMX(std::vector<int> pare
 //    parentB = {1, 5, 5, 4, 8, 4, 4, 2};
 
     std::vector<int> childA;
-    int *childA_tab = new int[parentA.size()];
+    std::vector<int> childA_tab(parentA.size());
     std::vector<int> childB;
-    int *childB_tab = new int[parentB.size()];
+    std::vector<int> childB_tab(parentA.size());
     std::map<int, int> childA_ItemsWeightCount;
     std::map<int, int> childB_ItemsWeightCount;
 
@@ -203,38 +201,33 @@ std::pair<std::vector<int>, std::vector<int>> crossoverPMX(std::vector<int> pare
     auto availableItemsWeightCount = getItemsNumberPerWeightCount(parentA);
 
     for (int i = sliceIndex1; i < sliceIndex2; i++) {
-        insertItemToChild_tab(i, parentB[i], childA_tab, childA_ItemsWeightCount, availableItemsWeightCount);
-        insertItemToChild_tab(i, parentA[i], childB_tab, childB_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentB[i], childA_tab.data(), childA_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentA[i], childB_tab.data(), childB_ItemsWeightCount, availableItemsWeightCount);
     }
 
     for (int i = 0; i < sliceIndex1; i++) {
-        insertItemToChild_tab(i, parentA[i], childA_tab, childA_ItemsWeightCount, availableItemsWeightCount);
-        insertItemToChild_tab(i, parentB[i], childB_tab, childB_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentA[i], childA_tab.data(), childA_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentB[i], childB_tab.data(), childB_ItemsWeightCount, availableItemsWeightCount);
     }
 
     for (int i = sliceIndex2; i < parentA.size(); i++) {
-        insertItemToChild_tab(i, parentA[i], childA_tab, childA_ItemsWeightCount, availableItemsWeightCount);
-        insertItemToChild_tab(i, parentB[i], childB_tab, childB_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentA[i], childA_tab.data(), childA_ItemsWeightCount, availableItemsWeightCount);
+        insertItemToChild_tab(i, parentB[i], childB_tab.data(), childB_ItemsWeightCount, availableItemsWeightCount);
     }
 
     int itemIndexToBeInserted;
     for (auto [itemWeight, count] : availableItemsWeightCount) {
         while (childA_ItemsWeightCount.count(itemWeight) == 0 || childA_ItemsWeightCount[itemWeight] != count) {
-            itemIndexToBeInserted = findAvailableIndex(childA_tab, parentA.size());
+            itemIndexToBeInserted = findAvailableIndex(childA_tab.data(), parentA.size());
             childA_tab[itemIndexToBeInserted] = itemWeight;
             childA_ItemsWeightCount[itemWeight] += 1;
-            //std::cout << childA_ItemsWeightCount[itemWeight] << std::endl;
-            //insertItemToChild(itemIndexToBeInserted, itemWeight, child_testA, childA_ItemsWeightCount, availableItemsWeightCount);
         }
         while (childB_ItemsWeightCount.count(itemWeight) == 0 || childB_ItemsWeightCount[itemWeight] != count) {
-            itemIndexToBeInserted = findAvailableIndex(childB_tab, parentA.size());
+            itemIndexToBeInserted = findAvailableIndex(childB_tab.data(), parentA.size());
             childB_tab[itemIndexToBeInserted] = itemWeight;
             childB_ItemsWeightCount[itemWeight] += 1;
-
-            //insertItemToChild(itemIndexToBeInserted, itemWeight, child_testB, childB_ItemsWeightCount, availableItemsWeightCount);
         }
     }
-
 
     std::vector<int> child_testA(parentA.size());
 
@@ -277,8 +270,13 @@ std::pair<std::vector<int>, std::vector<int>> crossoverPMX(std::vector<int> pare
 //    }
 //    std::cout << std::endl;
 
-    delete[] childA_tab;
-    delete[] childB_tab;
+// DOESNT WORK
+
+//    delete[] childA_tab;
+//    std::cout << "COS" << std::endl;
+//    delete[] childB_tab;
+
+
 
 //    std::cout << "Child A: ";
 //    for (auto item : childA_tab) {
@@ -298,7 +296,7 @@ std::pair<std::vector<int>, std::vector<int>> crossoverPMX(std::vector<int> pare
     return {child_testA, child_testB};
 }
 
-std::pair<std::vector<int>, std::vector<int>> crossover(std::vector<int> parentA , std::vector<int> parentB) {
+std::pair<std::vector<int>, std::vector<int>> crossoverItemStrip(std::vector<int> parentA , std::vector<int> parentB) {
     std::vector<int> childA;
     std::vector<int> childB;
     std::map<int, int> childA_ItemsWeightCount;
@@ -345,25 +343,46 @@ std::pair<std::vector<int>, std::vector<int>> crossover(std::vector<int> parentA
     return {childA, childB};
 }
 
-auto getChildren(std::vector<std::vector<int>> parents) {
+std::vector<std::vector<int>> GeneticAlgorithm::crossover(int crossoverMethod, std::vector<std::vector<int>> parents) {
     std::vector<std::vector<int>> children;
 
     for (int i = 0; i < parents.size(); i++) {
         if (i % 2) {
-            auto createdChildren = crossoverPMX(parents[i], parents[i - 1]);
+            std::pair<std::vector<int>, std::vector<int>> createdChildren;
+            switch (crossoverMethod) {
+                case 1:
+                    createdChildren = crossoverPMX(parents[i], parents[i - 1]);
+                    break;
+                case 2:
+                    createdChildren = crossoverItemStrip(parents[i], parents[i - 1]);
+                    break;
+                default:
+                    std::cout << "WRONG CROSSOVER TYPE ERROR" << std::endl;
+                    exit(0);
 
-            //std::cout << parents[i].size() << std::endl;
-
-            //exit(0);
+            }
 
             children.push_back(createdChildren.first);
             children.push_back(createdChildren.second);
 
         } else if (i == parents.size() - 1) {
-            auto createdChildren = crossoverPMX(parents[i], parents[i - 1]);
+            std::pair<std::vector<int>, std::vector<int>> createdChildren;
+            switch (crossoverMethod) {
+                case 1:
+                    createdChildren = crossoverPMX(parents[i], parents[i - 1]);
+                    break;
+                case 2:
+                    createdChildren = crossoverItemStrip(parents[i], parents[i - 1]);
+                    break;
+                default:
+                    std::cout << "WRONG CROSSOVER TYPE ERROR" << std::endl;
+                    exit(0);
+
+            }
 
             children.push_back(createdChildren.first);
         }
+
     }
 
     return children;
@@ -380,8 +399,8 @@ std::vector<int> swapRandomItems(std::vector<int> &child, Util *util) {
     return util->getRandomNeighbour(child);
 }
 
-std::vector<int> GeneticAlgorithm::mutation(std::vector<int> child, int mutationType) {
-    auto util = new Util();
+std::vector<int> GeneticAlgorithm::mutation(std::vector<int> child, int mutationType, int binSize) {
+    auto util = new Util(binSize);
 
     switch (mutationType) {
         case 1:
@@ -392,23 +411,21 @@ std::vector<int> GeneticAlgorithm::mutation(std::vector<int> child, int mutation
             std::cout << "WRONG MUTATION TYPE ERROR" << std::endl;
             exit(0);
     }
-
-    return util->getRandomNeighbour(child);
 }
 
-void GeneticAlgorithm::geneticAlgorithm(std::vector<int> items, int parameters[4]) {
-    auto population = getInitialPopulation(items, parameters[0]);
+void GeneticAlgorithm::geneticAlgorithm(std::vector<int> items, int parameters[6], int binSize) {
+    auto population = getInitialPopulation(items, parameters[0], binSize);
 
-    while(!terminalCondition(parameters[1], population)) {
-        auto parents = selection(population);
-        auto children = getChildren(parents);
+    while(!terminalCondition(parameters[1], population, parameters[4], parameters[5], binSize)) {
+        auto parents = selection(population, binSize);
+        auto children = crossover(parameters[2], parents);
 
         std::vector<std::vector<int>> modifiedChildren;
 
         for (auto &child : children) {
-            modifiedChildren.push_back(mutation(child, parameters[3]));
+            modifiedChildren.push_back(mutation(child, parameters[3], binSize));
         }
-//
+
         population = std::move(modifiedChildren);
 
 //        for (int i = 0; i < children.size(); i++) {
@@ -432,17 +449,10 @@ void GeneticAlgorithm::geneticAlgorithm(std::vector<int> items, int parameters[4
             population.begin(),
             population.end(),
             [&](auto l, auto r) {
-                return calculateFitness(l) < calculateFitness(r);
+                return calculateFitness(l, binSize) < calculateFitness(r, binSize);
             });
 
-    auto util = new Util();
+    auto util = new Util(binSize);
     std::cout << util->getBins(bestSolution).size() << std::endl;
-
-//    for (auto solution : population) {
-//        for (auto item : solution) {
-//            std::cout << item << " ";
-//        }
-//        std::cout << std::endl;
-//    }
 
 }

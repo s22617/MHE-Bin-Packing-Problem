@@ -2,14 +2,23 @@
 #define BINPACKINGPROBLEM_PARAMETERS_H
 
 namespace parameters {
+    int BIN_SIZE = 15;
+    int ITER = 100;
+
     // GENETIC ALGORITHM
     int POPULATION_SIZE = 100;
     int TERMINAL_CONDITION = 1;
     int CROSSOVER_METHOD = 1;
     int MUTATION_METHOD = 1;
+    int ITERATION_COUNT_LIMIT = 10;
+    int SHARED_POPULATION_FITNESS = 60;
+
+    //TABU SEARCH
+    int TABU_SIZE = INT_MAX;
+
+    //SIMULATED ANNEALING
+    int SA_TYPE = 1;
 
 }
-
-
 
 #endif //BINPACKINGPROBLEM_PARAMETERS_H

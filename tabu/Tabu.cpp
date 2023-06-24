@@ -5,18 +5,23 @@
 #include "../util/Util.h"
 
 
-//add tabu size
-void Tabu::tabuSearch(std::vector<int> items, int tabuSize) {
-    auto util = new Util();
+void Tabu::tabuSearch(std::vector<int> items, int tabuSize, int binSize, int iter) {
+    auto util = new Util(binSize);
+
+    auto shuffledItems = util->randomSolution(items);
 
     std::list<std::vector<int>> tabuList;
-    tabuList.push_back(items);
+    tabuList.push_back(shuffledItems);
 
     std::set<std::vector<int>> tabuSet;
-    tabuSet.insert(items);
+    tabuSet.insert(shuffledItems);
 
-    auto bestSolution = items;
-        for (int i = 0; i < 60; i++) {
+    auto bestSolution = shuffledItems;
+        for (int i = 0; i < iter; i++) {
+            for (auto item : bestSolution) {
+                std::cout << item << " ";
+            }
+            std::cout << std::endl;
             if (tabuSet.size() < tabuSize) {
                 auto neighbours = util->getNeighbours(tabuList.back());
 
@@ -28,6 +33,7 @@ void Tabu::tabuSearch(std::vector<int> items, int tabuSize) {
 
                 //std::cout << tabuSet.begin()->at(0) << std::endl;
                 if (neighbours.size() == 0) {
+                    //add backtracking
                     std::cout << "Ate my tail" << std::endl;
                     continue;
                 }
@@ -40,8 +46,10 @@ void Tabu::tabuSearch(std::vector<int> items, int tabuSize) {
                         [&](auto l, auto r) {
                             return util->getBins(l).size() > util->getBins(r).size();
                         });
+                int a = util->getBins(nextSolution).size();
+                int b = util->getBins(bestSolution).size();
 
-                if (util->getBins(nextSolution).size() <= util->getBins(bestSolution).size()) {
+                if (util->getBins(nextSolution).size() < util->getBins(bestSolution).size()) {
                     bestSolution = nextSolution;
                 }
 

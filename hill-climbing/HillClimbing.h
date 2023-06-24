@@ -9,8 +9,8 @@ class HillClimbing {
         return sInstance = (sInstance != nullptr) ? sInstance : new HillClimbing();
     }
 
-    void randomHillClimbing(std::vector<int> items);
-    void deterministicHillClimbing(std::vector<int> items);
+    void randomHillClimbing(std::vector<int> items, int binSize);
+    void deterministicHillClimbing(std::vector<int> items, int binSize);
 
     private:
     int bestBinsCount;

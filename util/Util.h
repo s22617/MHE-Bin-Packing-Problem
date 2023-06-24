@@ -4,17 +4,28 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <algorithm>
 
 namespace {
 auto randomDevice = std::random_device{};
 auto generator = std::mt19937{randomDevice()};
 
 //int binWeightLimit = 12;
-int binWeightLimit = 10;
+//int binWeightLimit = 10;
 }
 
 class Util {
     public:
+    Util() {}
+    Util(int binWeightLimit) {
+        this->binWeightLimit = binWeightLimit;
+    }
+    int binWeightLimit = 10;
+
+    int getBinSize() {
+        return binWeightLimit;
+    }
+
     std::vector<int> randomSolution(std::vector<int> items) {
         auto randomizedItems = items;
         std::shuffle(randomizedItems.begin(), randomizedItems.end(), generator);
@@ -42,7 +53,7 @@ class Util {
 
         auto neighbours = getNeighbours(items);
 
-        auto util = new Util();
+        auto util = new Util(binWeightLimit);
 
         auto bestNeighbour = *std::max_element(
                 neighbours.begin(),

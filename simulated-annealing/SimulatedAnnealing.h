@@ -15,7 +15,7 @@ public:
         return sInstance = (sInstance != nullptr) ? sInstance : new SimulatedAnnealing();
     }
 
-    void simulatedAnnealing(std::vector<int> items, std::function<double(int)> T);
+    void simulatedAnnealing(std::vector<int> items, int tp_type, int binSize, int iter);
 
 private:
     int bestBinsCount;

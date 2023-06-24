@@ -9,7 +9,7 @@ public:
         return sInstance = (sInstance != nullptr) ? sInstance : new Tabu();
     }
 
-    void tabuSearch(std::vector<int> items, int tabuSize);
+    void tabuSearch(std::vector<int> items, int tabuSize, int binSize, int iter);
 
 private:
     int bestBinsCount;
